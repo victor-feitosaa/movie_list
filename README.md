@@ -24,18 +24,9 @@ includes/: Abriga arquivos PHP reutilizáveis, como conexões e funções.​
 
 js/: Contém scripts JavaScript para funcionalidades no cliente.​
 
-public/: Diretório público acessível, geralmente contendo o ponto de entrada da aplicação.​
-
-Como Executar
-Clone o repositório para sua máquina local:​
-
-bash
-Copiar
-Editar
-git clone https://github.com/victor-feitosaa/movie_list.git
-Configure o ambiente com um servidor web compatível com PHP.​
 
 Script SQL:
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -97,5 +88,3 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 .​
-
-Acesse a aplicação através do navegador, apontando para o diretório public/.
