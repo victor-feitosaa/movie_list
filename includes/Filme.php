@@ -24,7 +24,7 @@ class Filme {
     public function create() {
         $query = "INSERT INTO " . $this->table_name . " 
                   (titulo, sinopse, data_lancamento, duracao, imagem, trailer_link) 
-                  VALUES (:titulo, :sinopse, :duracao, :data_lancamento, :imagem, :trailer_link)";
+                  VALUES (:titulo, :sinopse, :data_lancamento, :duracao, :imagem, :trailer_link)";
     
         $stmt = $this->conn->prepare($query);
     
@@ -42,7 +42,7 @@ class Filme {
 
     // Método para listar todos os filmes
     public function read() {
-        $query = "SELECT id, titulo, sinopse, duracao, data_lancamento, imagem, trailer_link ,genero FROM " . $this->table_name;
+        $query = "SELECT id, titulo, sinopse, data_lancamento, duracao, imagem, trailer_link ,genero FROM " . $this->table_name;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;

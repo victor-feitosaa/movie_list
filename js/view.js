@@ -34,8 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-
-
 document.addEventListener("click", function (e) {
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modal-title");
@@ -43,38 +41,47 @@ document.addEventListener("click", function (e) {
     const modalSynopsis = document.getElementById("modal-synopsis");
     const modalGenre = document.getElementById("modal-genre");
     const modalDuration = document.getElementById("modal-duration");
-    const modalDate = document.getElementById("modal-date");
     const modalTrailer = document.getElementById("modal-trailer");
 
     if (e.target.classList.contains("ver-detalhes")) {
         const card = e.target.closest(".card");
 
         if (card) {
-            modalTitle.textContent = card.querySelector("h4").textContent;
-            modalImage.src = card.querySelector("img").src;
-            modalSynopsis.textContent = card.querySelector(".sinopse").textContent;
-            modalGenre.textContent = card.querySelector(".genero").textContent;
-            modalDuration.textContent = card.querySelector(".duracao").textContent;
-            modalDate.textContent = card.querySelector(".date").textContent;
-
-            let link = card.querySelector(".trailer_link").textContent.trim();
-            console.log("Link original:", link);
-
-            // Extraindo o ID do vídeo e formatando corretamente a URL para o iframe
-            const videoId = extractYouTubeVideoId(link);
-
-            if (videoId) {
-                const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
-                modalTrailer.setAttribute("src", embedUrl);
-                console.log("URL de incorporação gerada:", embedUrl);
+            const titleElement = card.querySelector("h4");
+            const imageElement = card.querySelector("img");
+            const synopsisElement = card.querySelector(".sinopse");
+            const genreElement = card.querySelector(".genero");
+            const durationElement = card.querySelector(".duracao");
+            const trailerElement = card.querySelector(".trailer_link");
+        
+            // Verificando se os elementos existem antes de tentar acessar suas propriedades
+            modalTitle.textContent = titleElement ? titleElement.textContent : "Título não disponível";
+            modalImage.src = imageElement ? imageElement.src : "";
+            modalSynopsis.textContent = synopsisElement ? synopsisElement.textContent : "Sinopse não disponível";
+            modalGenre.textContent = genreElement ? genreElement.textContent : "Gênero não disponível";
+            modalDuration.textContent = durationElement ? durationElement.textContent : "Duração não disponível";
+        
+            if (trailerElement) {
+                let link = trailerElement.textContent.trim();
+                console.log("Link original:", link);
+                
+                const videoId = extractYouTubeVideoId(link);
+                if (videoId) {
+                    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+                    modalTrailer.setAttribute("src", embedUrl);
+                    console.log("URL de incorporação gerada:", embedUrl);
+                } else {
+                    console.error("Erro: ID do vídeo não encontrado.");
+                    modalTrailer.setAttribute("src", "");
+                }
             } else {
-                console.error("Erro: ID do vídeo não encontrado.");
-                modalTrailer.setAttribute("src", ""); // Limpa o iframe se o ID não for encontrado
+                console.error("Erro: Elemento do trailer não encontrado.");
+                modalTrailer.setAttribute("src", "");
             }
-
-            // Exibe o modal
+        
             modal.classList.remove("hidden");
         }
+        
     }
 
     // Fecha o modal e limpa o vídeo para parar a reprodução

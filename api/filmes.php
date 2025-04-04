@@ -2,12 +2,11 @@
 // /api/filmes.php
 
 header("Content-Type: application/json");
-include_once '../includes/db.php';
 include_once '../includes/Filme.php';
 
 // Criando a conexão com o banco de dados
-$database = new Database();
-$db = $database->getConnection();
+$database = new Conexao();
+$db = $database->conectar();
 
 // Instanciando a classe Filme
 $filme = new Filme($db);

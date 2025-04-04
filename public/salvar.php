@@ -43,12 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $pdo->beginTransaction();
 
-        // Se o usuário digitou um novo gênero, adiciona ao banco e pega o ID
-        if (!empty($novo_genero)) {
-            $stmt = $pdo->prepare("INSERT INTO generos (nome) VALUES (?)");
-            $stmt->execute([$novo_genero]);
-            $genero_id = $pdo->lastInsertId();
-        }
+
 
         // Insere o filme na tabela filmes, com o caminho correto da imagem
         $stmt = $pdo->prepare("INSERT INTO filmes (titulo, sinopse, duracao, data_lancamento, imagem, trailer_link) VALUES (?, ?, ?, ?, ?, ?)");

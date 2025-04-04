@@ -38,7 +38,7 @@
     <main>
 
         <div class="container mx-auto p-6" data-table>
-            <h1 class="text-3xl font-bold text-center mb-6">🎬 Lista de Filmes</h1>
+            <h1 class="text-3xl font-bold text-center mb-6"> Lista de Filmes</h1>
 
             <div class="flex gap-5 items-center justify-between mb-8 pb-2 border-b-white border-b-[1.5px]">
 
@@ -83,7 +83,7 @@
                         require_once 'conexao.php';
                         $pdo = Conexao::conectar();
 
-                        $stmt = $pdo->query("SELECT filmes.id, filmes.titulo, filmes.sinopse, filmes.duracao, filmes.data_lancamento, g.nome AS genero 
+                        $stmt = $pdo->query("SELECT filmes.id, filmes.titulo, filmes.sinopse, filmes.duracao, g.nome AS genero 
                                              FROM filmes 
                                              JOIN filme_genero fg ON filmes.id = fg.filme_id 
                                              JOIN generos g ON fg.genero_id = g.id");
@@ -160,7 +160,7 @@
                         $generosSelecionados = isset($_GET['filtro_genero']) ? $_GET['filtro_genero'] : [];
                         
                         // Base da consulta
-                        $sql = "SELECT filmes.id, filmes.titulo, filmes.imagem, filmes.sinopse, filmes.duracao, filmes.data_lancamento, filmes.trailer_link, g.nome AS genero 
+                        $sql = "SELECT filmes.id, filmes.titulo, filmes.sinopse, filmes.duracao, filmes.imagem, filmes.trailer_link, g.nome AS genero 
                                 FROM filmes 
                                 JOIN filme_genero fg ON filmes.id = fg.filme_id 
                                 JOIN generos g ON fg.genero_id = g.id";
@@ -226,7 +226,6 @@
                                 <!-- Adicionando sinopse e duração com classes específicas -->
                                 <div class="sinopse hidden"><?php echo $row['sinopse']; ?></div>
                                 <div class="duracao hidden"><?php echo $row['duracao']; ?> min</div>
-                                <div class="date hidden"><?php echo $row['data_lancamento']; ?> min</div>
                                 <div class="trailer_link hidden"><?php echo $row['trailer_link']; ?> </div>
                             </div>
 
@@ -278,8 +277,7 @@
 
             <p class=" mt-2 font-bold ">
                 Gênero: <span id="modal-genre" class="font-semibold"></span><br>
-                Duração: <span id="modal-duration" class="font-semibold"></span><br>
-          
+                Duração: <span id="modal-duration" class="font-semibold"></span>
             </p>
 
             <div class="flex flex-col gap2 ">
